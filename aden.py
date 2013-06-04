@@ -161,8 +161,13 @@ if __name__ == '__main__':
 
     adn.setProperties(quiet=args.quiet, out_mode=args.out_mode)
     adn.loadModules()
-    ret = adn.scan(args.URL)
 
+    try:
+        ret = adn.scan(args.URL)
+    except KeyboardInterrupt:
+        print "Bye :)"
+        sys.exit(1)
+    
     if not ret:
         if not args.quiet:
             print "\nNothing found :("
