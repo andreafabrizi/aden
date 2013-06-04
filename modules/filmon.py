@@ -47,6 +47,10 @@ class filmon(adenMod):
         else:
             return None
 
+        #Poor checking if the channel name is valid or not... 
+        if self.pageData.find(channel_name) < 0:
+            return None
+
         #Getting pageData again, because I need the cookies
         req = urllib2.Request(url)
         req.add_header('User-agent', utils.user_agent)
