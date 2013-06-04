@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+#
+# Copyright (C) 2013 Andrea Fabrizi <andrea.fabrizi@gmail.com>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public License
+# as published by the Free Software Foundation; either version 3 of
+# the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+# 02110-1301 USA
+#
+import os
+import urllib2
+import re
+
+user_agent = "Mozilla/5.0 (Windows NT 6.1; rv:11.0) Gecko/20100101 Firefox/11.0"
+
+"""
+Simple method to get the html content from a page url """
+def getUrlData(url, referer=""):
+
+    req = urllib2.Request(url)
+    req.add_header("Referer", referer)
+    req.add_header("User-agent", user_agent)
+    usock = urllib2.urlopen(req)
+    data = usock.read()
+    usock.close()
+    return data
+
+"""
+This function removes each space and CR/LF from the string.
+It's usefull to make error-tolerant the regex parsing """
+def trimData(data):
+    data = data.replace(" ", "")
+    data = data.replace("\n", "");
+    data = data.replace("\r", "");
+    return data
+
+"""
+Returns the domain from the full URL """
+def getDomainFromUrl(url):
+    m = re.search("http.*//([^/?]*).*", url)
+    if m:
+        return m.group(1)
+    else:
+        return None
+
