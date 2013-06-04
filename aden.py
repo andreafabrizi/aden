@@ -102,9 +102,11 @@ class aden():
                         self.print_results(mod)
                     else:
                         self.out("*** Error grabbing player properties!\n")
+                        sys.exit(1)
 
             except NameError as e:
                 self.out("*** Error running module %s: %s\n" % (mod.name, e))
+                sys.exit(1)
 
         return player_found
 
