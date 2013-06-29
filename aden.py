@@ -39,7 +39,7 @@ class aden():
     def loadModules(self):
 
         #Current path
-        cwd = os.path.dirname(__file__)
+        cwd = os.path.dirname(os.path.realpath(__file__))
 
         #Loading modules
         for filename in os.listdir(cwd + "/modules"):
