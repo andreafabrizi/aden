@@ -39,7 +39,7 @@ class ucaster(adenMod):
     def scan(self, url):
 
         #Getting the channel name from the script
-        m = re.search(".*width=([0-9]*).*height=([0-9]*).*channel='([^']*)'.*g='([0-9]*)'.*", utils.trimData(self.pageData))
+        m = re.search(".*width=([0-9]*),height=([0-9]*),channel='([^']*)',g='([0-9]*)'.*", utils.trimData(self.pageData))
         if m:
             width = m.group(1)
             height = m.group(2)
