@@ -104,8 +104,8 @@ class aden():
                         self.out("*** Error grabbing player properties!\n")
                         sys.exit(1)
 
-            except NameError as e:
-                self.out("*** Error running module %s: %s\n" % (mod.name, e))
+            except Exception as e:
+                self.out("*** Error running module %s: %s\n    Maybe the channel is not longer available." % (mod.name, e))
                 sys.exit(1)
 
         return player_found
