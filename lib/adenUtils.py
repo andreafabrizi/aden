@@ -21,15 +21,17 @@ import os
 import urllib2
 import re
 
-user_agent = "Mozilla/5.0 (Windows NT 6.1; rv:11.0) Gecko/20100101 Firefox/11.0"
+user_agent = "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.63 Safari/537.36"
 
 """
 Simple method to get the html content from a page url """
 def getUrlData(url, referer=""):
 
     req = urllib2.Request(url)
-    req.add_header("Referer", referer)
+    if referer:
+        req.add_header("Referer", referer)
     req.add_header("User-agent", user_agent)
+    req.add_header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
     usock = urllib2.urlopen(req)
     data = usock.read()
     usock.close()
