@@ -80,7 +80,10 @@ class aden():
             soup = BeautifulSoup(pagedata)
             for iframe in soup.findAll(["iframe", "frame"]):
                 if iframe.has_key("src") and iframe["src"] and re.search("^http[s]*://.*", iframe["src"], re.IGNORECASE):
-                    return self.scan(iframe["src"], url)
+                    player_found = self.scan(iframe["src"], url)
+                    if player_found:
+                        return True
+            return False
         else:
             return True
 
